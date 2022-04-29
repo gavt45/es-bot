@@ -1,8 +1,10 @@
 from vkwave.bots import Keyboard, ButtonColor
 
 # menu
+MENU = "Привет!"
 MENU_KB = Keyboard()
 MENU_KB.add_text_button(text="Пройти тест!", payload={"test": "-1"}, color=ButtonColor.POSITIVE)
+MENU_KB.add_link_button(text="Общий чатик", link="https://vk.me/join/AJQ1dw97/SBEQYIyQdZfG69y")
 
 # TEST Questions
 INPUT_NAME_TEXT = "Пожалуйста, введите имя:"
@@ -34,7 +36,7 @@ FAV_THEME = "Какой предмет нравится?"
 FAV_THEME_KB = Keyboard()
 FAV_THEME_KB.add_text_button(text="Матеша", payload={"q": "Матеша", "test": "2"}, color=ButtonColor.PRIMARY)
 FAV_THEME_KB.add_text_button(text="Русский/Литра", payload={"q": "русскийлитра", "test": "2"}, color=ButtonColor.PRIMARY)
-FAV_THEME_KB.add_text_button(text="Инфа", payload={"q": "Инфа", "test": "0"}, color=ButtonColor.PRIMARY)
+FAV_THEME_KB.add_text_button(text="Инфа", payload={"q": "Инфа", "test": "2"}, color=ButtonColor.PRIMARY)
 FAV_THEME_KB.add_row()
 FAV_THEME_KB.add_text_button(text="Физика", payload={"q": "Физика", "test": "2"}, color=ButtonColor.PRIMARY)
 FAV_THEME_KB.add_text_button(text="другое", payload={"q": "other", "test": "2"}, color=ButtonColor.PRIMARY)

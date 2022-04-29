@@ -2,13 +2,15 @@ import json
 import logging
 import random
 
-from vkwave.bots import DefaultRouter, SimpleBotEvent, simple_bot_message_handler, PayloadFilter, PayloadContainsFilter
+from vkwave.bots import DefaultRouter, SimpleBotEvent, simple_bot_message_handler, PayloadFilter, PayloadContainsFilter, \
+    PhotoUploader
 from vkwave.bots import Keyboard, ButtonColor
 from vkwave.bots import EventTypeFilter, BotEvent
 from vkwave.types.bot_events import BotEventType
 from vkwave.bots.fsm import FiniteStateMachine, StateFilter, ForWhat, State, ANY_STATE
 
 import locales
+from config import Config
 from db import DB
 from db.db import TestResult
 from locales import INPUT_NAME_TEXT
@@ -18,6 +20,7 @@ from locales import INPUT_NAME_TEXT
 # MENU_KB.add_text_button(text="Профиль", payload={"command": "profile"}, color=ButtonColor.SECONDARY)
 # MENU_KB.add_row()
 # MENU_KB.add_text_button(text="Бонус", payload={"command": "bonus"}, color=ButtonColor.POSITIVE)
+# from nft_things.NftSender import NFTSender
 
 test_router = DefaultRouter()
 
@@ -63,6 +66,16 @@ async def main_part_handle(event: BotEvent):
             keyboard=locales.questions[state_idx + 1][1].get_keyboard(),
         )
     else:
+        # todo add task to send user an image here
+        # Config().nft_sender.add_task()
+        logging.warn("Sending attach!")
+        big_attachment = await Config().uploader.get_attachments_from_paths(
+            peer_id=user_id,
+            file_paths=["img.jpg"],
+        )
+        await Config().api_ctx.messages.send(
+            user_id=user_id, attachment=big_attachment, random_id=0
+        )
         return await botevent.answer(
             message=locales.LAST_MESSAGE,
             keyboard=locales.LAST_MESSAGE_KB.get_keyboard(),

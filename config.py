@@ -9,3 +9,8 @@ class Config(metaclass=Singleton):
     PG_USER = os.environ["USER"]
     PG_PASS = os.environ["PASS"]
     PG_ADDR = os.environ["DB_ADDR"]
+
+    def __init__(self):
+        self.api_ctx = None
+        self.uploader = None
+
